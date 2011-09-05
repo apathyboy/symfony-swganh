@@ -40,4 +40,5 @@ security:
 fos_user:
     db_driver: orm
     firewall_name: main
+    model_manager_name: galaxy_manager
     user_class: Anh\GalaxyManagerBundle\Entity\Account

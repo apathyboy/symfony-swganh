@@ -35,17 +35,38 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
-        charset:  UTF8
-
+        default_connection: galaxy
+        connections:
+            galaxy:
+                driver:   %galaxy_database_driver%
+                host:     %galaxy_database_host%
+                port:     %galaxy_database_port%
+                dbname:   %galaxy_database_name%
+                user:     %galaxy_database_user%
+                password: %galaxy_database_password%
+                charset:  UTF8
+            galaxy_manager:
+                driver:   %galaxy_manager_database_driver%
+                host:     %galaxy_manager_database_host%
+                port:     %galaxy_manager_database_port%
+                dbname:   %galaxy_manager_database_name%
+                user:     %galaxy_manager_database_user%
+                password: %galaxy_manager_database_password%
+                charset:  UTF8
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        auto_mapping: true
+        #auto_mapping: true
+        default_entity_manager: galaxy
+        entity_managers:
+            galaxy:
+                connection: galaxy
+                mappings:
+                    AnhSwgManagerBundle: ~
+            galaxy_manager:
+                connection: galaxy_manager
+                mappings:
+                    AnhGalaxyManagerBundle: ~
+                    FOSUserBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
